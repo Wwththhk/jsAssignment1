@@ -11,12 +11,20 @@
             overflow-y: scroll;
             display: block;
         }
+        .product-item {
+            cursor: pointer;
+        }
+        .selected {
+            background-color: rgba(0, 123, 255);
+            color: white;
+        }
     </style>
 </head>
 <body>
     <h3>참치회 특가 판매</h3>
-    <div id="productContainer">
-    </div>
+    <div id="productContainer"></div>
+    <div id="selectedProducts"></div>
+    <div id="totalPrice">총액: 0원</div>
     <button>결제하기</button>
     <script src="main.js"></script>
 </body>
