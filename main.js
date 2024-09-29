@@ -12,6 +12,7 @@ let products = [
 let productContainer = document.getElementById('productContainer')
 let selectedProductsDiv = document.getElementById('selectedProducts')
 let totalPriceDiv = document.getElementById('totalPrice')
+let payButton = document.getElementById('payButton')
 
 let totalPrice = 0
 let selectedProducts = new Set()
@@ -27,7 +28,7 @@ products.forEach(product => {
             totalPrice -= product.price
             productItem.classList.remove('selected')
         } else {
-            selectedProducts.add(product.name);
+            selectedProducts.add(product.name)
             totalPrice += product.price
             productItem.classList.add('selected')
         }
@@ -42,5 +43,34 @@ function updateSelectedProducts() {
     totalPriceDiv.textContent = `총액: ${totalPrice}원`
 }
 
+payButton.addEventListener('click', () => {
+    if (selectedProducts.size === 0) {
+        alert('선택된 상품이 없습니다.')
+        return;
+    }
+
+    let paymentWindow = window.open('', '결제', 'width=600,height=200');
+    paymentWindow.document.write(`
+        <h3>결제창</h3>
+        <p>총액: ${totalPrice}원을 결제하겠습니다.</p>
+        <p>신용카드 번호를 입력 후 결제 버튼을 눌러주세요.</p>
+        <input type="text" placeholder="신용카드 번호" id="cardNumber" /><br/>
+        <button id="confirmPayment">결제</button>
+    `);
+
+    // paymentWindow.document.close()
+
+    paymentWindow.document.getElementById('confirmPayment').addEventListener('click', () => {
+        let cardNumber = paymentWindow.document.getElementById('cardNumber').value
+        if (cardNumber) {
+            alert(`${cardNumber}로 ${totalPrice}원이 결제 완료되었습니다.`)
+            paymentWindow.close()
+        } else {
+            alert('신용카드 번호를 입력하세요.')
+        }
+    })
+})
+
+            
 // 초기 총합 표시
 totalPriceDiv.textContent = `총액: ${totalPrice}원`
