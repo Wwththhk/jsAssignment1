@@ -15,7 +15,7 @@
             cursor: pointer;
         }
         .selected {
-            background-color: rgba(0, 123, 255);
+            background-color: #007aff;
             color: white;
         }
     </style>
@@ -23,8 +23,11 @@
 <body>
     <h3>참치회 특가 판매</h3>
     <div id="productContainer"></div>
-    <div id="selectedProducts"></div>
-    <div id="totalPrice">총액: 0원</div>
+    <div id="selectedProducts">
+        <h4 style="display: none;">선택한 상품:</h4>
+        <ul id="selectedProducts"></ul>
+    </div>
+    <div id="totalPrice" style="display: none;">총액: 0원</div>
     <button id="payButton">결제하기</button>
     <script src="main.js"></script>
 </body>

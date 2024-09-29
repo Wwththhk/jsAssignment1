@@ -39,8 +39,19 @@ products.forEach(product => {
 })
 
 function updateSelectedProducts() {
-    selectedProductsDiv.innerHTML = Array.from(selectedProducts).join(', ')
-    totalPriceDiv.textContent = `총액: ${totalPrice}원`
+    selectedProductsDiv.innerHTML = ''
+    selectedProducts.forEach(productName => {
+        let listItem = document.createElement('li')
+        listItem.textContent = productName
+        selectedProductsDiv.appendChild(listItem)
+    })
+
+    if (selectedProducts.size > 0) {
+        totalPriceDiv.style.display = 'block'
+        totalPriceDiv.textContent = `총액: ${totalPrice}원`
+    } else {
+        totalPriceDiv.style.display = 'none'
+    }
 }
 
 payButton.addEventListener('click', () => {
